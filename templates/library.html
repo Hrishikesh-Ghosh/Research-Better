@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="dashboard-body">
+
+<!-- Back Link -->
+<div class="back-link">
+    <a href="/dashboard">← Back to Dashboard</a>
+</div>
+
+<div class="library-container">
+
+    <h1 class="library-title">DOCUMENT LIBRARY</h1>
+
+    <!-- Search Bar -->
+    <form method="GET" class="search-bar">
+        <input type="text" name="search" placeholder="Search Papers (Case-Sensitive)">
+        <button type="submit">GO</button>
+    </form>
+
+    <!-- Back to all docs -->
+    {% if is_searching %}
+        <div class="back-to-all">
+            <a href="/library">← Back to all docs</a>
+        </div>
+    {% endif %}
+
+    <div class="delete-all-container">
+    <button class="delete-all-btn" onclick="openModal()">Delete All</button>
+    </div>
+
+    <!-- Files Grid -->
+    <div class="library-grid">
+    {% if files|length == 0 %}
+        <p class="no-results">No documents found</p>
+    {% else %}
+        {% for file in files %}
+        <div class="file-card-new">
+            <a href="/delete/{{ file }}" class="delete-btn-new">X</a>
+            <div class="file-name">
+                {{ file }}
+            </div>
+        </div>
+        {% endfor %}
+    {% endif %}
+    </div>
+
+</div>
+
+<!-- Confirmation Modal -->
+<div id="deleteModal" class="modal">
+    <div class="modal-content">
+        <p class="modal-text">
+            Important Warning: Do you want to delete all the documents you ever uploaded so far?
+        </p>
+
+        <div class="modal-buttons">
+            <a href="/delete_all" class="yes-btn">Yes</a>
+            <button class="no-btn" onclick="closeModal()">No</button>
+        </div>
+    </div>
+</div>
+
+<script>
+function openModal() {
+    document.getElementById("deleteModal").style.display = "flex";
+}
+function closeModal() {
+    document.getElementById("deleteModal").style.display = "none";
+}
+</script>
+
+</body>
+</html>

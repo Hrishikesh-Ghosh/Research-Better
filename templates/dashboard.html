@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="dashboard-body">
+
+<!-- Back Link -->
+<div class="back-link">
+    <a href="/">← Back to Homepage</a>
+</div>
+
+<div class="dashboard-container">
+
+    <!-- Top Button -->
+    <div class="top-button" onclick="location.href='/library'">
+        📄 View Uploaded Documents
+    </div>
+
+    <!-- Middle Grid -->
+    <div class="dashboard-grid">
+
+        <div class="dash-btn">📝 Generate Summary</div>
+        <div class="dash-btn">💡 Generate Insights</div>
+
+        <div class="dash-btn">📊 Visualise</div>
+        <div class="dash-btn">❓ Ask Questions</div>
+
+        <div class="dash-btn">⚖️ Compare Papers</div>
+        <div class="dash-btn">🌐 Search The Web</div>
+
+        <div class="dash-btn">📚 Citations</div>
+        <div class="dash-btn">🚨 Plagiarism Check</div>
+
+    </div>
+
+    <!-- Bottom Button -->
+    <div class="bottom-button">
+        ⚡ Generate Ideas
+    </div>
+
+</div>
+
+</body>
+</html>

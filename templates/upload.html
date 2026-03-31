@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="top-link">
+    <a href="/dashboard">Go to Dashboard without uploading →</a>
+</div>
+
+<div class="container">
+    <div class="title">WELCOME TO AI RESEARCH ASSISTANT</div>
+    <div class="subtitle">Research Made Easy!</div>
+
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+        <div class="upload-box">
+            <img src="{{ url_for('static', filename='images/cloud-icon.png') }}" alt="Cloud" class="centered-icon">
+            <p>Drag and Drop in this box</p>
+            <p class="or-text">or</p>
+            <input type="file" name="files" multiple id="fileInput" class="custom-file-btn">
+        </div>
+
+        <br>
+        <button type="submit" id="uploadBtn" disabled>Upload</button>
+    </form>
+</div>
+
+<script>
+    const fileInput = document.getElementById("fileInput");
+    const uploadBtn = document.getElementById("uploadBtn");
+    const uploadBox = document.querySelector(".upload-box");
+
+    uploadBox.addEventListener("dragover", (event) => {
+        event.preventDefault(); 
+        uploadBox.classList.add("drag-active");
+    });
+    uploadBox.addEventListener("dragleave", () => {
+        uploadBox.classList.remove("drag-active"); 
+    });
+    uploadBox.addEventListener("drop", (event) => {
+        event.preventDefault(); 
+        uploadBox.classList.remove("drag-active");
+        const droppedFiles = event.dataTransfer.files; 
+        if (droppedFiles.length > 0) {
+            fileInput.files = droppedFiles; 
+            fileInput.dispatchEvent(new Event("change")); 
+        }
+    });
+    fileInput.addEventListener("change", () => {
+        if (fileInput.files.length > 0) {
+            uploadBtn.disabled = false;
+        }
+    });
+</script>
+
+</body>
+</html>
