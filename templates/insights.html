@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/summary.css') }}">
+</head>
+<body>
+
+<div class="page-wrapper">
+
+  <!-- Back -->
+  <a href="{{ url_for('ui.dashboard') }}" class="back-link">← Back to Dashboard</a>
+
+  <!-- Title -->
+  <h2 style="text-align:center; margin-top:30px;">
+    CHOOSE A PAPER TO EXTRACT INSIGHTS :
+  </h2>
+
+  <!-- Dropdown row -->
+  <div style="display:flex; justify-content:center; margin-top:20px;">
+    <select id="paper-select" class="paper-select"></select>
+  </div>
+
+  <!-- Button row -->
+  <div style="display:flex; justify-content:center; margin-top:20px;">
+    <button id="btn-generate" class="btn-generate">
+      Extract Insights
+    </button>
+  </div>
+
+  <!-- OUTPUT -->
+  <div id="insights-container" style="margin-top:40px;"></div>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/insights.js') }}"></script>
+</body>
+</html>

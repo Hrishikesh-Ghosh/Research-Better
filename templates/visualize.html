@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/wordcloud2.js/1.1.2/wordcloud2.min.js"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/summary.css') }}">
+</head>
+
+<body>
+<div class="page-wrapper">
+  <a href="/dashboard" class="back-link">← Back to Dashboard</a>
+
+  <div class="viz-top">
+
+    <h2>CHOOSE A PAPER TO EXTRACT DATA :</h2>
+
+    <div class="viz-controls">
+      <select id="paper-select" class="paper-select"></select>
+      <button id="btn-visualize" class="btn-generate">Visualize</button>
+    </div>
+
+  </div>
+
+  <div class="viz-main">
+
+    <!-- LEFT -->
+    <div class="viz-left">
+      <h3>DIAGRAM TYPE</h3>
+
+      <label><input type="radio" name="viz" value="bar"> Bar Chart Topic Distribution</label><br>
+      <label><input type="radio" name="viz" value="section"> Section-wise Importance</label><br>
+      <label><input type="radio" name="viz" value="wordcloud"> Word Cloud</label>
+
+      <div class="viz-info">
+        <p><b>Bar Chart Topic Distribution</b> - Shows most important topics</p>
+        <p><b>Section-Wise Importance</b> - Shows which sections dominate</p>
+        <p><b>Word Cloud</b> - Big words = important concepts</p>
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="viz-right">
+      <h3>OUTPUT</h3>
+      <canvas id="chart"></canvas>
+      <div id="wordcloud"></div>
+    </div>
+
+  </div>
+
+  <script src="{{ url_for('static', filename='js/visualize.js') }}"></script>
+</div>
+</body>
+</html>

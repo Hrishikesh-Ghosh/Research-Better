@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Search The Web – AI Research Assistant</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/search.css') }}">
+</head>
+<body>
+
+<div class="page-wrapper">
+
+  <!--LEFT SIDEBAR — FILTERS-->
+  <aside class="sidebar" role="complementary" aria-label="Search filters">
+
+    <h2>FILTERS</h2>
+
+    <!-- Year range -->
+    <div class="filter-group">
+      <label>Year</label>
+      <div class="year-range">
+        <input type="number" id="year-from" placeholder="From"
+               min="1900" max="2099" aria-label="Year from" />
+        <span>–</span>
+        <input type="number" id="year-to"   placeholder="To"
+               min="1900" max="2099" aria-label="Year to" />
+      </div>
+    </div>
+
+    <!-- Publication type -->
+    <div class="filter-group">
+      <label>Publication Type</label>
+      <div class="check-item">
+        <input type="checkbox" class="pub-type-chk" id="type-journal"     value="journal" />
+        <label for="type-journal">Journal Article</label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" class="pub-type-chk" id="type-conference"  value="conference" />
+        <label for="type-conference">Conference Paper</label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" class="pub-type-chk" id="type-review"      value="review" />
+        <label for="type-review">Review / Survey</label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" class="pub-type-chk" id="type-thesis"      value="thesis" />
+        <label for="type-thesis">Thesis / Dissertation</label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" class="pub-type-chk" id="type-preprint"    value="preprint" />
+        <label for="type-preprint">Preprint</label>
+      </div>
+    </div>
+
+    <!-- Access type -->
+    <div class="filter-group">
+      <label>Access Type</label>
+      <div class="check-item">
+        <input type="checkbox" id="open-access" />
+        <label for="open-access">Open Access Only</label>
+      </div>
+    </div>
+
+    <!-- Fields of study (dynamic) -->
+    <div class="filter-group">
+      <label>Fields of Study</label>
+      <div class="tags-container" id="tags-container">
+        <span class="tags-placeholder">Search to see fields…</span>
+      </div>
+    </div>
+
+    <!-- Sort by -->
+    <div class="filter-group">
+      <label>Sort By</label>
+      <div class="radio-item">
+        <input type="radio" name="sort" id="sort-relevance" value="relevance" checked />
+        <label for="sort-relevance">Relevance</label>
+      </div>
+      <div class="radio-item">
+        <input type="radio" name="sort" id="sort-citations" value="citations" />
+        <label for="sort-citations">Most Cited</label>
+      </div>
+      <div class="radio-item">
+        <input type="radio" name="sort" id="sort-latest" value="latest" />
+        <label for="sort-latest">Latest</label>
+      </div>
+      <div class="radio-item">
+        <input type="radio" name="sort" id="sort-oldest" value="oldest" />
+        <label for="sort-oldest">Oldest</label>
+      </div>
+    </div>
+
+    <button class="btn-apply" id="btn-apply">Apply Filters</button>
+
+  </aside>
+
+  <!--MAIN CONTENT-->
+  <main class="main-content" role="main">
+
+    <!-- Back to dashboard -->
+    <a href="/dashboard" class="back-link">← Back to Dashboard</a>
+
+    <!-- Search bar -->
+    <div class="search-bar-wrapper" role="search">
+      <input
+        type="text"
+        id="search-input"
+        placeholder="Search The Web"
+        aria-label="Search research papers"
+        autocomplete="off"
+      />
+      <button class="btn-go" id="btn-go" aria-label="Search">GO</button>
+    </div>
+
+    <!-- Results header: count + per-page -->
+    <div class="results-header">
+      <div class="results-count" id="results-count" aria-live="polite"></div>
+      <div class="per-page-control">
+        <label for="per-page">Show:</label>
+        <select id="per-page" aria-label="Results per page">
+          <option value="5">5 per page</option>
+          <option value="10" selected>10 per page</option>
+          <option value="20">20 per page</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Cards grid -->
+    <div class="cards-grid" id="cards-grid" role="list">
+      <!-- Cards injected by JS -->
+    </div>
+
+    <!-- Pagination -->
+    <nav class="pagination" id="pagination" aria-label="Search results pagination"></nav>
+
+  </main>
+</div>
+
+<!--MODAL — Expanded paper details-->
+<div class="modal-overlay" id="modal-overlay" role="dialog"
+     aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal">
+    <button class="modal-close" id="modal-close" aria-label="Close">✕</button>
+
+    <span class="modal-pub-type" id="modal-pub-type"></span>
+    <h2 class="modal-title"  id="modal-title"></h2>
+    <p  class="modal-authors" id="modal-authors"></p>
+    <p  class="modal-meta"    id="modal-meta"></p>
+    <p  class="modal-meta"    id="modal-citations" style="margin-bottom:14px;font-weight:600;"></p>
+
+    <p class="modal-abstract-label">Abstract</p>
+    <p class="modal-abstract" id="modal-abstract"></p>
+
+    <div class="modal-actions">
+      <a id="modal-preview" class="btn-modal primary"
+         target="_blank" rel="noopener">Preview Paper ↗</a>
+      <button id="modal-library" class="btn-modal secondary">
+        Add to Library
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast notification -->
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="{{ url_for('static', filename='js/search.js') }}"></script>
+</body>
+</html>

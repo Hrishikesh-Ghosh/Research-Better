@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Compare Papers – AI Research Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/compare.css') }}">
+</head>
+<body>
+
+<div class="page-wrapper">
+
+  <!-- Back link -->
+  <a href="/dashboard" class="back-link">← Back to Dashboard</a>
+
+  <!--PAPER SELECTORS ROW-->
+  <div class="selectors-row" id="selectors-row">
+
+    <!-- Paper 1 -->
+    <div class="selector-group" id="group-0">
+      <span class="selector-label">Paper 1</span>
+      <div class="selector-inner">
+        <select id="select-0" aria-label="Select paper 1">
+          <option value="">Select Paper 1</option>
+          <option value="__upload__">📂 Upload new PDF…</option>
+        </select>
+        <span class="selector-arrow">▾</span>
+        <button class="btn-upload-inline" id="upload-btn-0" title="Upload PDF">📂</button>
+      </div>
+      <div class="file-badge" id="badge-0">
+        <span>📄</span>
+        <span class="fname"></span>
+        <button class="rm" aria-label="Remove">✕</button>
+      </div>
+      <input type="file" id="file-input-0" accept=".pdf" />
+    </div>
+
+    <!-- Paper 2 -->
+    <div class="selector-group" id="group-1">
+      <span class="selector-label">Paper 2</span>
+      <div class="selector-inner">
+        <select id="select-1" aria-label="Select paper 2">
+          <option value="">Select Paper 2</option>
+          <option value="__upload__">📂 Upload new PDF…</option>
+        </select>
+        <span class="selector-arrow">▾</span>
+        <button class="btn-upload-inline" id="upload-btn-1" title="Upload PDF">📂</button>
+      </div>
+      <div class="file-badge" id="badge-1">
+        <span>📄</span>
+        <span class="fname"></span>
+        <button class="rm" aria-label="Remove">✕</button>
+      </div>
+      <input type="file" id="file-input-1" accept=".pdf" />
+    </div>
+
+    <!-- Add paper button -->
+    <button class="btn-add-paper" id="btn-add-paper" aria-label="Add a third paper">+</button>
+
+  </div>
+
+  <!--COMPARE BUTTON-->
+  <div class="btn-compare-wrap">
+    <button class="btn-compare" id="btn-compare">Compare</button>
+  </div>
+
+  <!--PLACEHOLDER-->
+  <div class="state-placeholder" id="state-placeholder">
+    <p>Select two or more papers above, then click <strong>Compare</strong> to see a side-by-side analysis.</p>
+  </div>
+
+  <!--COMPARISON TABLE-->
+  <section class="table-section" id="table-section" aria-label="Comparison table">
+    <div class="table-header-row">
+      <span class="table-title">COMPARISON RESULTS</span>
+      <button class="btn-export" id="btn-export">⬇ Export PDF</button>
+    </div>
+    <div class="compare-table-wrap">
+      <table class="compare-table" id="compare-table">
+        <!-- Injected by JS -->
+      </table>
+    </div>
+  </section>
+
+  <!--RECOMMENDATION BANNER-->
+  <div class="recommendation" id="recommendation" aria-live="polite">
+    <div class="rec-banner">
+      <p class="rec-label">Recommended Paper</p>
+      <p class="rec-title" id="rec-title"></p>
+    </div>
+    <p class="rec-reason" id="rec-reason"></p>
+  </div>
+
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="{{ url_for('static', filename='js/compare.js') }}"></script>
+</body>
+</html>

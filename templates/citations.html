@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Citations – AI Research Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/citations.css') }}">
+</head>
+<body>
+<div class="page-wrapper">
+
+  <a href="/dashboard" class="back-link">← Back to Dashboard</a>
+
+  <section class="controls-section">
+    <div class="paper-select-row">
+      <span class="paper-select-label">CHOOSE A PAPER FOR CITATIONS :</span>
+      <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-start;">
+        <div class="select-wrapper">
+          <select id="paper-select" aria-label="Choose a paper">
+            <option value="">Select a paper…</option>
+            <option value="__upload__">📂 Upload new PDF…</option>
+          </select>
+        </div>
+        <input type="file" id="file-input" accept=".pdf" aria-hidden="true" />
+        <div class="file-badge" id="file-badge" role="status">
+          <span>📄</span>
+          <span class="file-name" id="badge-filename"></span>
+          <button class="remove-file" id="remove-file" aria-label="Remove">✕</button>
+        </div>
+        <p class="upload-hint">
+          Or <a id="upload-trigger" role="button" tabindex="0">click here to upload a PDF</a>
+        </p>
+      </div>
+    </div>
+
+    <div class="format-select-row">
+      <span class="format-select-label">SELECT CITATION STYLE :</span>
+      <div class="format-tabs" id="format-tabs" role="group" aria-label="Citation style">
+        <button class="fmt-btn active" data-fmt="APA"  aria-pressed="true">APA</button>
+        <button class="fmt-btn"        data-fmt="MLA"  aria-pressed="false">MLA</button>
+        <button class="fmt-btn"        data-fmt="IEEE" aria-pressed="false">IEEE</button>
+      </div>
+    </div>
+
+    <button class="btn-generate" id="btn-generate">Extract Citations</button>
+  </section>
+
+  <div class="state-placeholder" id="state-placeholder">
+    <span class="icon">📚</span>
+    <p>Select a paper and citation style above, then click <strong>Extract Citations</strong>.</p>
+  </div>
+
+  <article class="results-box" id="results-box" aria-live="polite">
+    <div class="results-header">
+      <div>
+        <h1 class="results-paper-title" id="results-paper-title"></h1>
+        <p class="citations-meta" id="citations-meta"></p>
+      </div>
+      <div class="export-row">
+        <button class="btn-export-word" id="btn-export-word">📄 Export to Word</button>
+        <button class="btn-export-pdf"  id="btn-export-pdf">⬇ Export PDF</button>
+      </div>
+    </div>
+    <div class="citation-list" id="citation-list"></div>
+  </article>
+
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/docx/8.5.0/docx.umd.min.js"></script>
+<script src="{{ url_for('static', filename='js/citations.js') }}"></script>
+</body>
+</html>

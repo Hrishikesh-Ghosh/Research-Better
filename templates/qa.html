@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/summary.css') }}">
+</head>
+<body>
+
+<div class="page-wrapper">
+
+<a href="/dashboard">← Back to Dashboard</a>
+
+<button id="share-btn" style="
+  position:absolute;
+  top:20px;
+  right:30px;
+  background:red;
+  color:white;
+  padding:8px 14px;
+  border:none;
+  border-radius:6px;
+">Share Chat</button>
+
+<!-- Paper select -->
+<select id="paper-select" class="paper-select"></select>
+
+<!-- Chat -->
+<div class="chat-container">
+  <div class="chat-container">
+    <div id="chat-box" class="chat-box"></div>
+  </div>
+</div>
+
+<!-- Input -->
+<div class="chat-input">
+  <input id="user-input" placeholder="Ask Anything..." />
+  <button id="send-btn">Send</button>
+</div>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/qa.js') }}"></script>
+</body>
+</html>

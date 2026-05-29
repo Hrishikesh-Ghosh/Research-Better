@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Generate Summary – AI Research Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/summary.css') }}">
+</head>
+<body>
+
+<div class="page-wrapper">
+
+  <!-- Back link -->
+  <a href="/dashboard" class="back-link">← Back to Dashboard</a>
+
+  <!--CONTROLS: dropdown + generate button-->
+  <section class="controls-section" aria-label="Paper selection">
+
+    <div class="paper-select-row">
+      <span class="paper-select-label">CHOOSE A PAPER TO SUMMARISE :</span>
+
+      <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-start;">
+        <div class="select-wrapper">
+          <select id="paper-select" aria-label="Choose a paper to summarise">
+            <option value="">Select a paper…</option>
+            <option value="__upload__">📂 Upload new PDF…</option>
+          </select>
+        </div>
+
+        <!-- Hidden file input -->
+        <input type="file" id="file-input" accept=".pdf" aria-hidden="true" />
+
+        <!-- Uploaded file badge -->
+        <div class="file-badge" id="file-badge" role="status">
+          <span>📄</span>
+          <span class="file-name" id="badge-filename"></span>
+          <button class="remove-file" id="remove-file" aria-label="Remove uploaded file">✕</button>
+        </div>
+
+        <p class="upload-hint">
+          Or <a id="upload-trigger" role="button" tabindex="0">click here to upload a PDF</a> from your computer
+        </p>
+      </div>
+    </div>
+
+    <button class="btn-generate" id="btn-generate" aria-label="Generate summary">
+      Generate Summary
+    </button>
+
+  </section>
+
+  <!--PLACEHOLDER (shown before first summary)-->
+  <div class="state-placeholder" id="state-placeholder" role="status">
+    <span class="icon">📄</span>
+    <p>Select or upload a research paper above, then click <strong>Generate Summary</strong> to get a structured analysis.</p>
+  </div>
+
+  <!--SUMMARY OUTPUT BOX-->
+  <article class="summary-box" id="summary-box" aria-live="polite" aria-label="Paper summary">
+
+    <div class="summary-header">
+      <h1 class="summary-paper-title" id="summary-paper-title"></h1>
+      <button class="btn-export" id="btn-export" aria-label="Export summary as PDF">
+        ⬇ Export PDF
+      </button>
+    </div>
+
+    <!-- Sections injected by JS -->
+    <div id="sections-wrap"></div>
+
+  </article>
+
+</div>
+
+<!-- Toast notification -->
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="{{ url_for('static', filename='js/summary.js') }}"></script>
+</body>
+</html>

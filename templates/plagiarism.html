@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/summary.css') }}">
+</head>
+<body>
+
+<div class="page-wrapper">
+
+<a href="{{ url_for('ui.dashboard') }}">← Back to Dashboard</a>
+
+<div style="display:flex; justify-content:center; gap:40px; margin-top:30px;">
+  <select id="paper1" class="paper-select"></select>
+  <select id="paper2" class="paper-select"></select>
+</div>
+
+<div style="display:flex; justify-content:center; margin-top:20px;">
+  <div class="plagiarism-guide">
+    <h3>Overall document score</h3>
+
+    <p>0–20% → Likely unrelated or only common jargon overlap</p>
+    <p>20–40% → Same topic/keywords; usually normal for similar domains</p>
+    <p>40–60% → Significant overlap → review needed</p>
+    <p>60–80% → Strong overlap → high suspicion, inspect closely</p>
+    <p>80%+ → Very high → often near-duplicate or heavy copying</p>
+  </div>
+</div>
+<div class="plagiarism-btn-wrapper">
+  <button id="btn-check" class="btn-generate">
+    Check for Plagiarism
+  </button>
+</div>
+
+<div style="text-align:center; margin-top:30px;">
+  <div class="score-container">
+    <h2>Similarity Score:</h2>
+    <span id="score-box" style="
+        background:#f4d742;
+        padding:10px 20px;
+        font-size:28px;
+        border-radius:6px;
+    ">--%</span>
+  </div>
+</div>
+
+<div id="matches" style="margin-top:40px;"></div>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/plagiarism.js') }}"></script>
+</body>
+</html>
