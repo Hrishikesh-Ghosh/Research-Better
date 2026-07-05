@@ -5,11 +5,14 @@ Research paper analysis platform built using Flask.
 ## Features
 
 - Generate Summary
-- Compare Papers
-- Ask Questions
-- Generate Insights
-- Plagiarism Check
 - Visualizations
+- Compare Papers
+- Generate Insights
+- Ask Questions
+- Search The Web
+- Generate Ideas
+- Plagiarism Check
+- Citations
 
 ## Technologies
 
